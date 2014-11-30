@@ -30,10 +30,10 @@ function addCat() {
     }
 }
 
-$(document).ready(function () {
-    addCat();
-    getData();
-});
+//$(document).ready(function () {
+//    addCat();
+//    getData();
+//});
 
 
 var getData = function () {

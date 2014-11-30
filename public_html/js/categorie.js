@@ -20,12 +20,13 @@ var ViewModel = function (categories) {
     self.categories = ko.observableArray(ko.utils.arrayMap(categories, function (categorie) {
         return new Category(categorie);
     }));
+
 };
 
 self.remove = function (categorie) {
     self.categories.remove(categorie);
     $.ajax({
-        url: "http://localhost:8080/BiblioProject/webresources/categorie",
+        url: "http://localhost:8080/BiblioProject/webresources/categorie/" + self.id,
         type: "DELETE",
         contentType: "application/json",
         headers: {
@@ -33,14 +34,32 @@ self.remove = function (categorie) {
         }
     })
             .success(function (data, status, jq) {
-                // alert(status);
+                console.log(status);
                 self.categories.remove(categorie);
             })
             .error(function (jq, status, error) {
+                alert(status);
                 $(".error").text(JSON.stringify(status + " " + error));
 
             });
 };
-self.update = function (categorie) {
-    //Effectuez votre requête AJAX ici
-};
+//self.update = function (categorie) {
+//    self.categories.update(categorie);
+//    $.ajax({
+//        url: "http://localhost:8080/BiblioProject/webresources/categorie/",
+//        type: "PUT",
+//        contentType: "application/json",
+//        headers: {
+//            Accept: "application/json"
+//        }
+//    })
+//            .success(function (data, status, jq) {
+//                alert(status);
+//                self.categories.update(categorie);
+//            })
+//            .error(function (jq, status, error) {
+//                alert(status);
+//                $(".error").text(JSON.stringify(status + " " + error));
+//
+//            });
+//};

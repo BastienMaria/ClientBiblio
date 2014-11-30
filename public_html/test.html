@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type='text/javascript' src='js/knockout-3.2.0.js'></script>
+    </head>
+    <body>
+
+        <!--         This is a *view* - HTML markup that defines the appearance of your UI 
+
+                <p>First name: <strong data-bind="text: firstName"></strong></p>
+                <p>Last name: <strong data-bind="text: lastName"></strong></p>
+
+                <script>
+                    // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+                    function AppViewModel() {
+                        this.firstName = "Bert";
+                        this.lastName = "Bertington";
+                    }
+
+        // Activates knockout.js
+                    ko.applyBindings(new AppViewModel());
+                </script>-->
+
+
+        <div>You've clicked <span data-bind='text: numberOfClicks'>&nbsp;</span> times</div>
+         
+        <button data-bind='click: registerClick, disable: hasClickedTooManyTimes'>Click me</button>
+         
+        <div data-bind='visible: hasClickedTooManyTimes'>
+                That's too many clicks! Please stop before you wear out your fingers.
+                <button data-bind='click: resetClicks'>Reset clicks</button>
+        </div>
+
+
+        <script>
+            var ClickCounterViewModel = function () {
+                    this.numberOfClicks = ko.observable(0);
+ 
+                    this.registerClick = function () {
+                            this.numberOfClicks(this.numberOfClicks() + 1);
+                    };
+ 
+                    this.resetClicks = function () {
+                            this.numberOfClicks(0);
+                    };
+ 
+                    this.hasClickedTooManyTimes = ko.pureComputed(function () {
+                            return this.numberOfClicks() >= 3;
+                    }, this);
+            };
+ 
+ko.applyBindings(new ClickCounterViewModel());
+        </script>
+
+    </body>
+</html>
