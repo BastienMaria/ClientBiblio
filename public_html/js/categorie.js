@@ -21,3 +21,26 @@ var ViewModel = function (categories) {
         return new Category(categorie);
     }));
 };
+
+self.remove = function (categorie) {
+    self.categories.remove(categorie);
+    $.ajax({
+        url: "http://localhost:8080/BiblioProject/webresources/categorie",
+        type: "DELETE",
+        contentType: "application/json",
+        headers: {
+            Accept: "application/json"
+        }
+    })
+            .success(function (data, status, jq) {
+                // alert(status);
+                self.categories.remove(categorie);
+            })
+            .error(function (jq, status, error) {
+                $(".error").text(JSON.stringify(status + " " + error));
+
+            });
+};
+self.update = function (categorie) {
+    //Effectuez votre requête AJAX ici
+};
