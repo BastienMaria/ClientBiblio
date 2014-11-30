@@ -6,23 +6,19 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Categories REST</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type='text/javascript' src='js/jquery/jquery.js'></script>
-        <script type='text/javascript' src='js/bootstrap.min.js'></script>
+
         <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
+
+        <script type='text/javascript' src='js/jquery/jquery.js'></script>
+        <script type='text/javascript' src='js/bootstrap.min.js'></script>       
         <script type='text/javascript' src='js/knockout-3.2.0.js'></script>      
         <script type='text/javascript' src='js/ws.js'></script>     
         <script type='text/javascript' src='js/categorie.js'></script>  
     </head>
     <body>
-
-        <button onclick="addCat()">
-            Ajouter des categories
-        </button>
-
-        <script>getData()</script>
         <h2>Categories</h2>
         <div >
             <table class='contactsEditor'>
@@ -43,15 +39,44 @@ and open the template in the editor.
                         <td >
                             <input data-bind='value: description, enable: (parseInt(id())%2 ===0)' />  
                         </td>
-                        <td >
+                        <td>
                             <input type="button" value="Supprimer" data-bind="click: removed"/>
-                            <input type="button" value="MAJ" onclick="updateCategorie(id, nom, description)" />  
+                            <input type="button" value="Mise à jour" onclick="updated(id, nom, description)" />  
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="error"></div>
+        <br/>
+
+        <form class="form-horizontal">
+            <!-- Search input-->
+            <div class="control-group">
+                <label class="control-label" for="id">ID :</label>
+                <div class="controls">
+                    <input id="id" name="id" type="text" placeholder="" class="input-mini search-query">
+                </div>
+            </div>
+
+            <!-- Search input-->
+            <div class="control-group">
+                <label class="control-label" for="description">Description :</label>
+                <div class="controls">
+                    <input id="description" name="description" type="text" placeholder="" class="input-mini search-query">
+                </div>
+            </div>
+
+            <!-- Search input-->
+            <div class="control-group">
+                <label class="control-label" for="nom">Nom :</label>
+                <div class="controls">
+                    <input id="nom" name="nom" type="text" placeholder="" class="input-mini search-query">
+                </div>
+            </div>
+            <br/>
+            <input type="button" value="Ajouter" data-bind="click: added"/>
+        </form>
+
 
     </body>
 </html>

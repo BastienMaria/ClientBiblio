@@ -60,8 +60,7 @@ self.removed = function (categorie) {
 //
 //};
 
-function updateCategorie(id, nom, description) {
-    alert(id + '  ' + nom + '   ' + description + '  ');
+function updated(id, nom, description) {
     jQuery.ajax({
         type: "PUT",
         url: ["http://localhost:8080/BiblioProject/webresources/categorie/" + parseInt(this.id())],
@@ -76,4 +75,30 @@ function updateCategorie(id, nom, description) {
 
         }
     });
+}
+
+self.added = function () {
+
+    var id = document.getElementById("id").value;
+    var description = document.getElementById("description").value;
+    var nom = document.getElementById("nom").value;
+    var JSONObject = {
+        "description": description,
+        "id": id,
+        "nom": nom
+    };
+
+    $.ajax({
+        url: ["http://localhost:8080/BiblioProject/webresources/categorie/"],
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(JSONObject),
+        dataType: 'JSON'
+    })
+            .success(function (data) {
+                self.categories.update(categorie);
+            })
+            .error(function (jq, status, error) {
+                $(".error").text(JSON.stringify(status + " " + error));
+            });
 }
