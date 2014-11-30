@@ -101,8 +101,12 @@ self.added = function () {
     })
             .success(function (data) {
                 self.categories.update(categorie);
+
             })
             .error(function (jq, status, error) {
                 $(".error").text(JSON.stringify(status + " " + error));
             });
+
+    $("span").text("Ajout réalisé!").show().fadeOut(2000);
+
 }
