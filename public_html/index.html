@@ -13,29 +13,14 @@ and open the template in the editor.
         <script type='text/javascript' src='js/bootstrap.min.js'></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
         <script type='text/javascript' src='js/knockout-3.2.0.js'></script>      
-
         <script type='text/javascript' src='js/ws.js'></script>     
         <script type='text/javascript' src='js/categorie.js'></script>  
     </head>
     <body>
 
-        <!--        <button data-bind="click: myFunction">
-                    Click me
-                </button>
-        
-                <script type="text/javascript">
-                    var viewModel = {
-                        myFunction: function (data, event) {
-                            if (event.shiftKey) {
-                                alert("coucou")
-                            } else {
-                                alert("kiki")
-                            }
-                        }
-                    };
-                    ko.applyBindings(viewModel);
-                </script>-->
-
+        <button onclick="addCat()">
+            Ajouter des categories
+        </button>
 
         <script>getData()</script>
         <h2>Categories</h2>
@@ -44,7 +29,8 @@ and open the template in the editor.
                 <tr>
                     <th>Id</th>
                     <th>Nom</th>
-                    <th>déscription</th>
+                    <th>Description</th>
+                    <th>Actions</th>
                 </tr>
                 <tbody data-bind="foreach: categories">
                     <tr>
@@ -58,8 +44,8 @@ and open the template in the editor.
                             <input data-bind='value: description, enable: (parseInt(id())%2 ===0)' />  
                         </td>
                         <td >
-                            <input type="button" value="Supprimer" data-bind="click: remove"/>  
-                            <input type="button" value="MAJ" />  
+                            <input type="button" value="Supprimer" data-bind="click: removed"/>
+                            <input type="button" value="MAJ" onclick="updateCategorie(id, nom, description)" />  
                         </td>
                     </tr>
                 </tbody>
