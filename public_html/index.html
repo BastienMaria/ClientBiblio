@@ -15,7 +15,6 @@ and open the template in the editor.
         <script type='text/javascript' src='js/jquery/jquery.js'></script>
         <script type='text/javascript' src='js/bootstrap.min.js'></script>       
         <script type='text/javascript' src='js/knockout-3.2.0.js'></script>      
-        <script type='text/javascript' src='js/ws.js'></script>     
         <script type='text/javascript' src='js/categorie.js'></script>  
     </head>
     <body>
@@ -49,7 +48,7 @@ and open the template in the editor.
         </div>
         <br/>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="formCategorie">
             <!-- Search input-->
             <div class="control-group">
                 <label class="control-label" for="id">ID :</label>
@@ -74,9 +73,39 @@ and open the template in the editor.
                 </div>
             </div>
             <br/>
-            <input type="button" value="Ajouter" data-bind="click: added"/>
+            <!--<input type="button" value="Ajouter" data-bind="click: added"/>-->
+            <input type="submit" value="Ajouter"/>
         </form>
 
+        <script>
+            $("form").submit(function (event) {
 
+                var myObject = new Object();
+                myObject.description = $("#description").val();
+                myObject.id = $("#id").val();
+                myObject.nom = $("#nom").val();
+
+                var myString = JSON.stringify(myObject);
+                alert(myString)
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/BiblioProject/webresources/categorie",
+                    data: JSON.stringify(myObject),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert('data');
+                    },
+                    failure: function (errMsg) {
+                        alert('errMsg');
+                    }
+                });
+
+            });
+        </script>
+
+
+        <script type='text/javascript' src='js/ws.js'></script>     
     </body>
 </html>

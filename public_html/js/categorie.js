@@ -60,6 +60,10 @@ self.removed = function (categorie) {
 //
 //};
 
+function addCategorie(description) {
+
+}
+
 function updated(id, nom, description) {
     jQuery.ajax({
         type: "PUT",
