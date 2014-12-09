@@ -31,8 +31,10 @@ function addCat() {
 }
 
 $(document).ready(function () {
-    //addCat();
+    addCat();
     getData();
+
+    console.log($('form').serializeArray());
 });
 
 var getData = function () {
@@ -69,6 +71,18 @@ $.ajax({
 
 }).error(function (jq, status, error) {
 });
+
+function checkConnexion(user, mdp) {
+    $.ajax({
+        url: "http://localhost:8080/BiblioProject/webresources/users/check/" + user + "/" + mdp
+    }).then(function (data) {
+        $('.result').append(data);
+    });
+}
+
+
+
+
 
 
 
