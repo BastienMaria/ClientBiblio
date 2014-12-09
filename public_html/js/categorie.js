@@ -26,7 +26,7 @@ var ViewModel = function (categories) {
 self.removed = function (categorie) {
     self.categories.remove(categorie);
     $.ajax({
-        url: ["http://localhost:8080/BiblioProject/webresources/categorie/" + parseInt(this.id())],
+        url: "http://localhost:8080/BiblioProject/webresources/categorie/" + categorie.id(),
         type: "DELETE",
         contentType: "application/json",
         headers: {
@@ -34,7 +34,7 @@ self.removed = function (categorie) {
         }
     })
             .success(function (data, status, jq) {
-                alert(status);
+
                 // self.categories.remove(categorie);
             })
             .error(function (jq, status, error) {
@@ -42,46 +42,26 @@ self.removed = function (categorie) {
             });
 };
 
-//self.updated = function (categorie) {
-//    self.categories.update(categorie);
-//    jQuery.ajax({
-//        type: "PUT",
-//        url: ["http://localhost:8080/BiblioProject/webresources/categorie/" + parseInt(this.id())],
-//        contentType: "application/json; charset=utf-8",
-//        data: categorie.toJsonString(),
-//        dataType: "json",
-//        success: function (data, status, jqXHR) {
-//            alert("ok");
-//        },
-//        error: function (jqXHR, status) {
-//            alert("error");
-//        }
-//    });
-//
-//};
-
-function addCategorie(description) {
-
-}
-
-function updated(id, nom, description) {
-    jQuery.ajax({
+self.updated = function (categorie) {
+    $.ajax({
+        url: "http://localhost:8080/BiblioProject/webresources/categorie/" + categorie.id(),
         type: "PUT",
-        url: ["http://localhost:8080/BiblioProject/webresources/categorie/" + parseInt(this.id())],
-        contentType: "application/json; charset=utf-8",
-        data: categorie.toJsonString(),
-        dataType: "json",
-        success: function (data, status, jqXHR) {
-            // do something
-        },
-        error: function (jqXHR, status) {
-            // error handler
-
+        contentType: "application/json",
+        data: JSON.stringify(ko.toJS(categorie), null, 2),
+        headers: {
+            Accept: "application/json"
         }
-    });
-}
+    })
+            .success(function (data, status, jq) {
 
-self.added = function () {
+            })
+            .error(function (jq, status, error) {
+                $(".error").text(JSON.stringify(status + " " + error));
+
+            });
+};
+
+self.added = function (categorie) {
 
     var id = document.getElementById("id").value;
     var description = document.getElementById("description").value;
@@ -93,7 +73,7 @@ self.added = function () {
     };
 
     $.ajax({
-        url: ["http://localhost:8080/BiblioProject/webresources/categorie/"],
+        url: "http://localhost:8080/BiblioProject/webresources/categorie/",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(JSONObject),
@@ -109,4 +89,5 @@ self.added = function () {
 
     $("span").text("Ajout réalisé!").show().fadeOut(2000);
 
-}
+    //window.location.reload();
+};

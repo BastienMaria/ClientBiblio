@@ -1,83 +1,91 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html lang="en">
     <head>
-        <title>Categories REST</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WebServices catégorie</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <script type='text/javascript' src='js/jquery/jquery.js'></script>
-        <script type='text/javascript' src='js/bootstrap.min.js'></script>       
         <script type='text/javascript' src='js/knockout-3.2.0.js'></script>      
         <script type='text/javascript' src='js/ws.js'></script>     
-        <script type='text/javascript' src='js/categorie.js'></script>  
+        <script type='text/javascript' src='js/categorie.js'></script>
     </head>
     <body>
         <div class="container">
+
             <h2>Categories</h2>
-            <div >
-                <table class='table'>
+
+            <table class='table table-striped'>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                <tbody data-bind="foreach: categories">
                     <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Actions</th>
+                        <td>
+                            <label class="col-md-4 control-label" data-bind='text: id' > </label>
+                        </td>
+                        <td>
+                            <input class="form-control input-sm" data-bind='value: nom' />
+                        </td>
+                        <td >
+                            <input class="form-control input-sm" data-bind='value: description, enable: (parseInt(id())%2 ===0)' />  
+                        </td>
+                        <td>                  
+                            <button class="btn btn-danger" data-bind="click: removed">Supprimer</button>
+                            <button class="btn btn-primary" data-bind="click: updated">Mise à jour</button>  
+                        </td>
                     </tr>
-                    <tbody data-bind="foreach: categories">
-                        <tr>
-                            <td>
-                                <label data-bind='text: id' > </label>
-                            </td>
-                            <td>
-                                <input data-bind='value: nom' />
-                            </td>
-                            <td >
-                                <input data-bind='value: description, enable: (parseInt(id())%2 ===0)' />  
-                            </td>
-                            <td>                  
-                                <button class="btn btn-danger" data-bind="click: removed">Supprimer</button>
-                                <button class="btn btn-primary" onclick="updated(id, nom, description)">Mise à jour</button>  
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Ajouter une catégorie</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form class="form-horizontal" >
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="id">ID :</label>
+                                    <div class="col-md-4">
+                                        <input id="id" name="id" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nom">Nom :</label>
+                                    <div class="col-md-4">
+                                        <input id="nom" name="nom" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="description">Description :</label>
+                                    <div class="col-md-4">
+                                        <input id="description" name="description" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" ></label>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-success" data-bind="click: added"/>Ajouter</button>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br/>
-
-            <form class="form-horizontal" id="formCategorie">
-                <!-- Search input-->
-                <div class="control-group">
-                    <label class="control-label" for="id">ID :</label>
-                    <div class="controls">
-                        <input id="id" name="id" type="text" placeholder="" class="input-mini search-query">
-                    </div>
-                </div>
-
-                <!-- Search input-->
-                <div class="control-group">
-                    <label class="control-label" for="description">Description :</label>
-                    <div class="controls">
-                        <input id="description" name="description" type="text" placeholder="" class="input-mini search-query">
-                    </div>
-                </div>
-
-                <!-- Search input-->
-                <div class="control-group">
-                    <label class="control-label" for="nom">Nom :</label>
-                    <div class="controls">
-                        <input id="nom" name="nom" type="text" placeholder="" class="input-mini search-query">
-                    </div>
-                </div>
-                <br/>
-                <button class="btn btn-success" data-bind="click: added"/>Ajouter</button>
-                <span></span>
-
-            </form>
         </div>
     </body>
-</html>
+</html>                                		                                		

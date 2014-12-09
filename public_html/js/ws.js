@@ -31,7 +31,7 @@ function addCat() {
 }
 
 $(document).ready(function () {
-    //  addCat();
+    //addCat();
     getData();
 });
 
