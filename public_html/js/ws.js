@@ -33,7 +33,6 @@ function addCat() {
 $(document).ready(function () {
     addCat();
     getData();
-
 });
 
 $("#form").submit(function (event) {
