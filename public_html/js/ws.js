@@ -34,7 +34,13 @@ $(document).ready(function () {
     addCat();
     getData();
 
-    console.log($('form').serializeArray());
+});
+
+$("#form").submit(function (event) {
+    var user = $('#userName').val();
+    var mdp = $('#mdp').val();
+    checkConnexion(user, mdp);
+    event.preventDefault();
 });
 
 var getData = function () {
@@ -42,7 +48,7 @@ var getData = function () {
         url: "http://localhost:8080/BiblioProject/webresources/categorie",
         type: "GET",
         headers: {
-            Accept: "application/json"
+            Accept: "application/json",
         }
     }).success(function (data, status, jq) {
         //Cette fonction indique à knockout d'appliquer les données aux éléments de la page 
@@ -76,7 +82,7 @@ function checkConnexion(user, mdp) {
     $.ajax({
         url: "http://localhost:8080/BiblioProject/webresources/users/check/" + user + "/" + mdp
     }).then(function (data) {
-        $('.result').append(data);
+        alert(data);
     });
 }
 

@@ -13,28 +13,48 @@ and open the template in the editor.
         <link href="css/connect.css" rel="stylesheet" media="screen">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-        <script type='text/javascript' src='js/ws.js'></script>     
 
     </head>
     <body>
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
-
                     <div class="account-wall">
-                        <form class="form-signin">
-                            <input type="text" class="form-control" placeholder="Email" required autofocus>
-                            <input type="password" class="form-control" placeholder="Password" required>
+                        <form class="form-signin" id="form" method="POST" action="http://localhost:8080/BiblioProject/webresources/users/check">
+                            <input name="user" id="userName" type="text" class="form-control" placeholder="UserName" required autofocus>
+                            <input name="mdp" id="mdp" type="password" class="form-control" placeholder="Password" required>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>   
+        <script>
+//            var user = $("input[name=\"user\"]").val();
+//            var mdp = $("input[name=\"mdp\"]").val();
+//
+//            $("#form").submit(function (event) {
+//                $.ajax({
+//                    url: "http://localhost:8080/BiblioProject/webresources/users/check",
+//                    type: "POST",
+//                    async: true, // set to false if you don't mind the page pausing while waiting for response
+//                    cache: false,
+//                    dataType: "json",
+//                    data: "{ 'user': '" + user + "', 'mdp': '" + mdp + "' }",
+//                    contentType: "application/json; charset=utf-8",
+//                    success: function (data) {
+//                        // handle your successful response here
+//                        alert(data)
+//                    },
+//                    error: function (xhr, ajaxOptions, thrownError) {
+//                        // handle your fail response here
+//                    }
+//                });
+//            });
+        </script>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-        <div>
-            <p class="result">Resultat :  </p>
-        </div>
+
     </body>
 </html>
